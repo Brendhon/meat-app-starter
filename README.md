@@ -8,7 +8,7 @@
 
 ### Instalando as Dependências
 
-`npm install`
+`npm i`
 
 ### Inicializando o Servidor
 
