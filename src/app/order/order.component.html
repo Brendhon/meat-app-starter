@@ -79,7 +79,7 @@
           <p class="lead">Formas de Pagamento:</p>
 
           <div class="form-group">
-            <mt-radio [options]="paymentOptions" name="paymentOption" ngModel></mt-radio>
+            <mt-radio [options]="paymentOptions" name="paymentOption" ngModel required></mt-radio>
           </div>
 
         </div>
@@ -97,7 +97,8 @@
 
     <div class="row">
       <div class="col-xs-12">
-        <button href="order-summary.html" [disabled]="!form.valid" class="btn btn-success pull-right">
+        <button href="order-summary.html" [disabled]="!form.valid || cartItems().length === 0"
+          class="btn btn-success pull-right">
           <i class="fa fa-credit-card"></i>
           Concluir Pedido
         </button>
