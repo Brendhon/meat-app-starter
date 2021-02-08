@@ -1,21 +1,26 @@
 import { Injectable } from "@angular/core";
 import { CartItem } from "app/restaurant-detail/shopping-cart/cart-item.model";
 import { ShoppingCartService } from "app/restaurant-detail/shopping-cart/shopping-cart.service";
+import { Observable } from "rxjs/Observable";
+import { Order, OrderItem } from "./order.model";
+import { Headers, Http, RequestOptions } from "@angular/http";
+
+import { MEAT_API } from "../app.api";
 
 @Injectable()
 export class OrderService {
-  constructor(private cartService: ShoppingCartService) {}
+  constructor(private cartService: ShoppingCartService, private http: Http) {}
   
-  cartItems(): CartItem[]{
-    return this.cartService.items
+  cartItems(): CartItem[] {
+    return this.cartService.items;
   }
   
   increaseQty(item: CartItem) {
-    this.cartService.increaseQty(item)
+    this.cartService.increaseQty(item);
   }
   
   decreaseQty(item: CartItem) {
-    this.cartService.decreaseQty(item)
+    this.cartService.decreaseQty(item);
   }
   
   remove(item: CartItem) {
@@ -25,5 +30,20 @@ export class OrderService {
   itemsValue(): number {
     return this.cartService.total();
   }
+  
+  clear() {
+    this.cartService.clear()
+  }
 
-}
+  checkOrder(order: Order): Observable<string> {
+    // Criando um header da requisição
+    const headers = new Headers();
+    headers.append("Content-type", "application/json");
+    
+    return this.http.post(
+      `${MEAT_API}/orders`,
+      JSON.stringify(order), // Objeto enviado
+      new RequestOptions({ headers: headers }), // Adicionado o header na requisição
+      ).map((resp) => resp.json()); // Realizando um map na resposta e pegando-a no formato JSON
+    }
+  }
