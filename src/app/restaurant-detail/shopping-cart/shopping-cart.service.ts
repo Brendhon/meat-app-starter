@@ -1,8 +1,8 @@
 import { MenuItem } from "../menu-item/menu-item.model";
-import { CardItem } from "./cart-item.model";
+import { CartItem } from "./cart-item.model";
 
 export class ShoppingCartService {
-  items: CardItem[];
+  items: CartItem[];
 
   constructor() {
       this.items = []
@@ -14,11 +14,11 @@ export class ShoppingCartService {
     if (foundItem) {
       foundItem.quantity = foundItem.quantity + 1;
     } else {
-      this.items.push(new CardItem(item));
+      this.items.push(new CartItem(item));
     }
   }
 
-  removeItem(item: CardItem) {
+  removeItem(item: CartItem) {
     this.items.splice(this.items.indexOf(item), 1);
   }
 
