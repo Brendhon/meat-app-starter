@@ -17,8 +17,13 @@ export class OrderService {
   decreaseQty(item: CartItem) {
     this.cartService.decreaseQty(item)
   }
-
+  
   remove(item: CartItem) {
     this.cartService.removeItem(item);
   }
+  
+  itemsValue(): number {
+    return this.cartService.total();
+  }
+
 }
