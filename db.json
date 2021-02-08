@@ -121,7 +121,7 @@
     {
       "id": "espreso",
       "imagePath": "assets/img/foods/espreso.png",
-      "name": "Super Espreso",
+      "name": "Super Espresso",
       "description": "Café espresso duplo. ",
       "price": 12.5,
       "restaurantId": "coffee-corner"
