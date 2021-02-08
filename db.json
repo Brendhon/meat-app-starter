@@ -370,5 +370,87 @@
       "restaurantId": "tasty-treats"
     }
   ],
-  "orders": []
+  "orders": [
+    {
+      "address": "Rua Quito Carneito ",
+      "number": "5",
+      "optionalAddress": "",
+      "paymentOption": "MON",
+      "orderItems": [
+        {
+          "quantity": 1,
+          "menuId": "burger"
+        },
+        {
+          "quantity": 1,
+          "menuId": "fries"
+        }
+      ],
+      "id": 1
+    },
+    {
+      "address": "Rua Quito Carneito ",
+      "number": "1",
+      "optionalAddress": "",
+      "paymentOption": "MON",
+      "orderItems": [
+        {
+          "quantity": 1,
+          "menuId": "burger"
+        },
+        {
+          "quantity": 1,
+          "menuId": "fries"
+        }
+      ],
+      "id": 2
+    },
+    {
+      "address": "Rua Quito Carneito ",
+      "number": "6",
+      "optionalAddress": "",
+      "paymentOption": "MON",
+      "orderItems": [
+        {
+          "quantity": 1,
+          "menuId": "cup-cake"
+        },
+        {
+          "quantity": 1,
+          "menuId": "donut"
+        }
+      ],
+      "id": 3
+    },
+    {
+      "address": "Rua Quito Carneito ",
+      "number": "5",
+      "optionalAddress": "",
+      "paymentOption": "CRE",
+      "orderItems": [
+        {
+          "quantity": 1,
+          "menuId": "zlasagna"
+        },
+        {
+          "quantity": 1,
+          "menuId": "greensandwich"
+        }
+      ],
+      "id": 4
+    },
+    {
+      "address": "Rua Quito Carneito ",
+      "number": "5",
+      "optionalAddress": "",
+      "paymentOption": "MON",
+      "orderItems": [
+        {
+          "quantity": 1,
+          "menuId": "espreso"
+        }
+      ],
+      "id": 5
+    }
+  ]
 }

@@ -10,40 +10,41 @@ import { MEAT_API } from "../app.api";
 @Injectable()
 export class OrderService {
   constructor(private cartService: ShoppingCartService, private http: Http) {}
-  
+
   cartItems(): CartItem[] {
     return this.cartService.items;
   }
-  
+
   increaseQty(item: CartItem) {
     this.cartService.increaseQty(item);
   }
-  
+
   decreaseQty(item: CartItem) {
     this.cartService.decreaseQty(item);
   }
-  
+
   remove(item: CartItem) {
     this.cartService.removeItem(item);
   }
-  
+
   itemsValue(): number {
     return this.cartService.total();
   }
-  
+
   clear() {
-    this.cartService.clear()
+    this.cartService.clear();
   }
 
   checkOrder(order: Order): Observable<string> {
     // Criando um header da requisição
     const headers = new Headers();
     headers.append("Content-type", "application/json");
-    
+
     return this.http.post(
       `${MEAT_API}/orders`,
       JSON.stringify(order), // Objeto enviado
-      new RequestOptions({ headers: headers }), // Adicionado o header na requisição
-      ).map((resp) => resp.json()); // Realizando um map na resposta e pegando-a no formato JSON
-    }
+      new RequestOptions({ headers: headers }))
+      .map((resp) => resp.json()) // Realizando um map na resposta e pegando-a no formato JSON
+      .map((order) => order.id); // realizando um map para pegar apenas o atributo ID
   }
+}
