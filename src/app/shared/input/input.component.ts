@@ -1,29 +1,40 @@
-import { Component, ContentChild, Input, OnInit, AfterContentInit } from "@angular/core";
-import { NgModel } from "@angular/forms";
+import {
+  AfterContentInit,
+  Component,
+  ContentChild,
+  Input,
+  OnInit,
+} from "@angular/core";
+import { FormControlName, NgModel } from "@angular/forms";
 
 @Component({
   selector: "mt-input-container",
   templateUrl: "./input.component.html",
 })
 export class InputComponent implements OnInit, AfterContentInit {
-  input: any;
-
   @Input()
   label: string;
 
   @Input()
   errorMessage: string;
+  
+  input: any;
 
   // Pegar a referencia para um atributo filho, neste caso será o NgModel
-  @ContentChild(NgModel) model: NgModel
+  @ContentChild(NgModel)
+  model: NgModel;
+  @ContentChild(FormControlName)
+  control: FormControlName;
 
   constructor() {}
-   
+
   // Ele será chamado assim que o conteúdo for definido
   ngAfterContentInit(): void {
-    this.input = this.model
+    this.input = this.model || this.control;
     if (this.input === undefined) {
-      throw new Error('Esse componente precisa ser usado como uma diretiva NgModel')
+      throw new Error(
+        "Esse componente precisa ser usado como uma diretiva NgModel ou FormControlName",
+      );
     }
   }
 
@@ -31,10 +42,10 @@ export class InputComponent implements OnInit, AfterContentInit {
   }
 
   hasSuccess(): boolean {
-    return this.input.valid && (this.input.dirty || this.input.touched)
+    return this.input.valid && (this.input.dirty || this.input.touched);
   }
 
   hasError(): boolean {
-    return this.input.invalid && (this.input.dirty || this.input.touched)
+    return this.input.invalid && (this.input.dirty || this.input.touched);
   }
 }
