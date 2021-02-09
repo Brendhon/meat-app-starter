@@ -1,7 +1,7 @@
 import { BrowserModule } from "@angular/platform-browser";
 import { LOCALE_ID, NgModule } from "@angular/core";
 import { HttpModule } from "@angular/http";
-import { RouterModule } from "@angular/router";
+import { PreloadAllModules, RouterModule } from "@angular/router";
 
 import { ROUTES } from "../app/app.routes";
 
@@ -35,8 +35,12 @@ import { SharedModule } from "./shared/shared.module";
   imports: [
     BrowserModule,
     HttpModule,
-    RouterModule.forRoot(ROUTES),
-    SharedModule.forRoot(), // Como foi importado o FormsModule e outros, não é necessário importa-los novamente
+
+    // PreloadAllModules - Faz com que os Lazy Loading sejam carregados em paralelos e não apenas quando são abertas
+    RouterModule.forRoot(ROUTES, { preloadingStrategy: PreloadAllModules }),
+    
+    // Como foi importado o FormsModule e outros, não é necessário importa-los novamente
+    SharedModule.forRoot(),
   ],
   providers: [
     {
