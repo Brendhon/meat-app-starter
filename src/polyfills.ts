@@ -20,3 +20,6 @@ import "zone.js/dist/zone";
 
 import "intl";
 import "intl/locale-data/jsonp/pt-BR.js";
+
+// Importando biblioteca para que certos navegadores consigam realizar as animações
+import 'web-animations-js/web-animations.min.js'

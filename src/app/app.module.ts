@@ -2,6 +2,7 @@ import { BrowserModule } from "@angular/platform-browser";
 import { LOCALE_ID, NgModule } from "@angular/core";
 import { HttpModule } from "@angular/http";
 import { PreloadAllModules, RouterModule } from "@angular/router";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 
 import { ROUTES } from "../app/app.routes";
 
@@ -35,6 +36,7 @@ import { SharedModule } from "./shared/shared.module";
   imports: [
     BrowserModule,
     HttpModule,
+    BrowserAnimationsModule, // Para que tenhamos as animações na aplicação inteira
 
     // PreloadAllModules - Faz com que os Lazy Loading sejam carregados em paralelos e não apenas quando são abertas
     RouterModule.forRoot(ROUTES, { preloadingStrategy: PreloadAllModules }),
