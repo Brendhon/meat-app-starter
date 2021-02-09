@@ -1,9 +1,12 @@
-import { NgModule } from "@angular/core";
+import { ModuleWithProviders, NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { InputComponent } from "./input/input.component";
 import { RadioComponent } from "./radio/radio.component";
 import { RatingComponent } from "./rating/rating.component";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { ShoppingCartService } from "app/restaurant-detail/shopping-cart/shopping-cart.service";
+import { RestaurantService } from "app/restaurants/restaurants.service";
+import { OrderService } from "app/order/order.service";
 
 @NgModule({
   imports: [
@@ -17,7 +20,7 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
     RatingComponent,
   ],
   //Exportando CommonModule, FormsModule, ReactiveFormsModule para que não seja necessário importa-los depois
-  exports: [ 
+  exports: [
     InputComponent,
     RadioComponent,
     RatingComponent,
@@ -26,4 +29,16 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
     ReactiveFormsModule,
   ],
 })
-export class SharedModule {}
+
+export class SharedModule {
+  static forRoot(): ModuleWithProviders {
+    return {
+      ngModule: SharedModule,
+      providers: [
+        ShoppingCartService,
+        RestaurantService,
+        OrderService,
+      ],
+    };
+  }
+}

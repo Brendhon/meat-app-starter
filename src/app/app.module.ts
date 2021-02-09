@@ -17,7 +17,6 @@ import { MenuItemComponent } from "./restaurant-detail/menu-item/menu-item.compo
 import { ReviewsComponent } from "./restaurant-detail/reviews/reviews.component";
 import { OrderSummaryComponent } from "./order-summary/order-summary.component";
 import { SharedModule } from "./shared/shared.module";
-import { CoreModule } from "./core/core.module";
 
 @NgModule({
   declarations: [
@@ -37,8 +36,7 @@ import { CoreModule } from "./core/core.module";
     BrowserModule,
     HttpModule,
     RouterModule.forRoot(ROUTES),
-    SharedModule, // Como foi importado o FormsModule e outros, não é necessário importa-los novamente
-    CoreModule,
+    SharedModule.forRoot(), // Como foi importado o FormsModule e outros, não é necessário importa-los novamente
   ],
   providers: [
     {
