@@ -9,7 +9,6 @@ import { RestaurantsComponent } from "./restaurants/restaurants.component";
 
 export const ROUTES: Routes = [
   { path: "", component: HomeComponent },
-  { path: "about", loadChildren: './about/about.module#AboutModule' },
   { path: "restaurants", component: RestaurantsComponent },
   {
     path: "restaurants/:id",
@@ -20,6 +19,7 @@ export const ROUTES: Routes = [
       {path: "reviews", component: ReviewsComponent},
     ],
   },
-  { path: "order", component: OrderComponent },
+  { path: "about", loadChildren: './about/about.module#AboutModule' },
+  { path: "order", loadChildren: './order/order.module#OrderModule' },
   { path: "order-summary", component: OrderSummaryComponent },
 ];

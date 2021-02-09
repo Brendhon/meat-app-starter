@@ -11,7 +11,6 @@ const ROUTES: Routes = [
 @NgModule({
   imports: [
     CommonModule,
-    RouterModule,
     RouterModule.forChild(ROUTES), // Utilizando "forChild" por causa de ser uma rota filha
   ],
   declarations: [
