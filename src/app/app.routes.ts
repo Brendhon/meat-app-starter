@@ -1,5 +1,6 @@
 import { Routes } from "@angular/router";
 import { HomeComponent } from "./home/home.component";
+import { NotFoundComponent } from "./not-found/not-found.component";
 import { OrderSummaryComponent } from "./order-summary/order-summary.component";
 import { MenuComponent } from "./restaurant-detail/menu/menu.component";
 import { RestaurantDetailComponent } from "./restaurant-detail/restaurant-detail.component";
@@ -13,14 +14,17 @@ export const ROUTES: Routes = [
     path: "restaurants/:id",
     component: RestaurantDetailComponent,
     children: [
-      {path: "", redirectTo: 'menu', pathMatch: 'full'},
-      {path: "menu", component: MenuComponent},
-      {path: "reviews", component: ReviewsComponent},
+      { path: "", redirectTo: "menu", pathMatch: "full" },
+      { path: "menu", component: MenuComponent },
+      { path: "reviews", component: ReviewsComponent },
     ],
   },
   { path: "order-summary", component: OrderSummaryComponent },
 
   // Lazy Loading
-  { path: "about", loadChildren: './about/about.module#AboutModule' },
-  { path: "order", loadChildren: './order/order.module#OrderModule' },
+  { path: "about", loadChildren: "./about/about.module#AboutModule" },
+  { path: "order", loadChildren: "./order/order.module#OrderModule" },
+
+  // Caso nenhuma das rotas anteriores seja encontradas entre nessa rota
+  { path: "**", component: NotFoundComponent },
 ];
