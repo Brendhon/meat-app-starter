@@ -8,6 +8,8 @@ export class RatingComponent implements OnInit {
   @Output()
   rated = new EventEmitter<number>();
 
+  check: boolean = false;
+
   rates: number[] = [1, 2, 3, 4, 5];
 
   rate: number = 0;
@@ -21,8 +23,9 @@ export class RatingComponent implements OnInit {
 
   setRate(r: number) {
     this.rate = r;
+    this.check = true;
     this.previousRate = undefined;
-    this.rated.emit(r)
+    this.rated.emit(r);
   }
 
   setTemporaryRate(r: number) {
