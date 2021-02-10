@@ -21,7 +21,7 @@ export class ShoppingCartService {
     }
 
     // Publicando a mensagens para os ouvintes
-    this.notificationService.notify(`Você adicionou o item ${item.name}`)
+    this.notificationService.notify(`Você adicionou o item ${item.name}`, true)
   }
   
   increaseQty(item: CartItem) {
@@ -40,7 +40,7 @@ export class ShoppingCartService {
     this.items.splice(this.items.indexOf(item), 1);
     
     // Publicando a mensagens para os ouvintes
-    this.notificationService.notify(`Você removeu o item ${item.menuItem.name}`)
+    this.notificationService.notify(`Você removeu o item ${item.menuItem.name}`, false)
   }
   
   clear() {

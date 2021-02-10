@@ -40,6 +40,7 @@ import "rxjs/add/operator/switchMap";
 export class SnackbarComponent implements OnInit {
   message: string = "Hello World";
   snackVisibility: string = "hidden";
+  add: boolean;
 
   constructor(private notificationService: NotificationService) {}
 
@@ -48,9 +49,10 @@ export class SnackbarComponent implements OnInit {
     // subscribe - Coloca um listening no Observable
     // do - Permite realizar uma ação no meio da cadeia
     this.notificationService.notifier
-      .do((msg) => { // Realiza uma ação e mostra o Snackbar
-        this.message = msg;
+      .do((resp) => { // Realiza uma ação e mostra o Snackbar
+        this.message = resp.message;
         this.snackVisibility = "visible";
+        this.add = resp.add;
       }).switchMap((msg) => Observable.timer(3000)) // Trocar o Observable por um timer
       .subscribe((timer) => this.snackVisibility = "hidden"); // Realiza o subscribe para ouvir quando o timer terminar
   }

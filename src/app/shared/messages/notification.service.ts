@@ -3,12 +3,12 @@ import { EventEmitter, Injectable } from '@angular/core';
 @Injectable()
 export class NotificationService {
 
-  notifier = new EventEmitter<string>()
+  notifier = new EventEmitter<any>()
 
   constructor() {}
 
-  notify(message: string){
-    this.notifier.emit(message)
+  notify(message: string, add: boolean){
+    this.notifier.emit({message, add})
   }
 
 }

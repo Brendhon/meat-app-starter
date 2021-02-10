@@ -11,3 +11,11 @@
     left: 50%;
     bottom: 30px;
 }
+
+.add {
+    background-color: #1E712F;
+}
+
+.remove {
+    background-color: #B85444;
+}
