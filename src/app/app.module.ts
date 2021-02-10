@@ -2,7 +2,7 @@ import { BrowserModule } from "@angular/platform-browser";
 import { LOCALE_ID, NgModule } from "@angular/core";
 import { HttpModule } from "@angular/http";
 import { PreloadAllModules, RouterModule } from "@angular/router";
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
 import { ROUTES } from "../app/app.routes";
 
@@ -18,7 +18,8 @@ import { MenuItemComponent } from "./restaurant-detail/menu-item/menu-item.compo
 import { ReviewsComponent } from "./restaurant-detail/reviews/reviews.component";
 import { OrderSummaryComponent } from "./order-summary/order-summary.component";
 import { SharedModule } from "./shared/shared.module";
-import { NotFoundComponent } from './not-found/not-found.component';
+import { NotFoundComponent } from "./not-found/not-found.component";
+import { HashLocationStrategy, LocationStrategy } from "@angular/common";
 
 @NgModule({
   declarations: [
@@ -42,7 +43,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
 
     // PreloadAllModules - Faz com que os Lazy Loading sejam carregados em paralelos e não apenas quando são abertas
     RouterModule.forRoot(ROUTES, { preloadingStrategy: PreloadAllModules }),
-    
+
     // Como foi importado o FormsModule e outros, não é necessário importa-los novamente
     SharedModule.forRoot(),
   ],
@@ -50,6 +51,11 @@ import { NotFoundComponent } from './not-found/not-found.component';
     {
       provide: LOCALE_ID,
       useValue: "pt-BR",
+    },
+    {
+      // Utilizar a estrategia de Hash para a navegação
+      provide: LocationStrategy,
+      useClass: HashLocationStrategy,
     },
   ],
   bootstrap: [AppComponent],
