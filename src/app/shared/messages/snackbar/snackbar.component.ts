@@ -46,7 +46,7 @@ export class SnackbarComponent implements OnInit {
   ngOnInit() {
     // Se inscreve no Observable e quando for notificado realiza a operação
     // subscribe - Coloca um listening no Observable
-    // do - Permite realizar uma ação no meio da cadeia 
+    // do - Permite realizar uma ação no meio da cadeia
     this.notificationService.notifier
       .do((msg) => { // Realiza uma ação e mostra o Snackbar
         this.message = msg;
