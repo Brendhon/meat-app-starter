@@ -25,11 +25,12 @@ import { Restaurant } from "./restaurant.model";
 export class RestaurantComponent implements OnInit {
   @Input()
   restaurant: Restaurant;
-
-  restaurantState = 'ready'
-
-  constructor() {}
-
+  restaurantState:string;
+  
+  constructor() {
+    this.restaurantState = 'ready'
+  }
+  
   ngOnInit() {
   }
 }
