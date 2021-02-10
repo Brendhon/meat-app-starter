@@ -18,7 +18,9 @@ export const ROUTES: Routes = [
       {path: "reviews", component: ReviewsComponent},
     ],
   },
+  { path: "order-summary", component: OrderSummaryComponent },
+
+  // Lazy Loading
   { path: "about", loadChildren: './about/about.module#AboutModule' },
   { path: "order", loadChildren: './order/order.module#OrderModule' },
-  { path: "order-summary", component: OrderSummaryComponent },
 ];
