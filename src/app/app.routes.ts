@@ -6,12 +6,13 @@ import { MenuComponent } from "./restaurant-detail/menu/menu.component";
 import { RestaurantDetailComponent } from "./restaurant-detail/restaurant-detail.component";
 import { ReviewsComponent } from "./restaurant-detail/reviews/reviews.component";
 import { RestaurantsComponent } from "./restaurants/restaurants.component";
+import { LoggedInGuard } from "./security/loggedin.guard";
 import { LoginComponent } from "./security/login/login.component";
 
 export const ROUTES: Routes = [
   { path: "", component: HomeComponent },
+  { path: "login/:to", component: LoginComponent },
   { path: "login", component: LoginComponent },
-  { path: "restaurants", component: RestaurantsComponent },
   {
     path: "restaurants/:id",
     component: RestaurantDetailComponent,
@@ -21,11 +22,16 @@ export const ROUTES: Routes = [
       { path: "reviews", component: ReviewsComponent },
     ],
   },
+  { path: "restaurants", component: RestaurantsComponent },
   { path: "order-summary", component: OrderSummaryComponent },
 
   // Lazy Loading
   { path: "about", loadChildren: "./about/about.module#AboutModule" },
-  { path: "order", loadChildren: "./order/order.module#OrderModule" },
+  {
+    path: "order",
+    loadChildren: "./order/order.module#OrderModule",
+    canLoad: [LoggedInGuard],
+  },
 
   // Caso nenhuma das rotas anteriores seja encontradas entre nessa rota
   { path: "**", component: NotFoundComponent },
