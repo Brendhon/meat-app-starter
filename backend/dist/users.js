@@ -13,6 +13,7 @@ var User = (function () {
     return User;
 }());
 exports.User = User;
+// Objeto tipo chave/valor: Key - tipo string e Valor - tipo User
 exports.users = {
     "juliana@gmail.com": new User("juliana@gmail.com", "Juliana", "juliana23"),
     "amanda@gmail.com": new User("amanda@gmail.com", "Amanda", "amanda23")
