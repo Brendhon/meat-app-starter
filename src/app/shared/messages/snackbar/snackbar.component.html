@@ -1,5 +1,5 @@
 <div class="snackbar" [@snack-visibility]="snackVisibility"
-   [class.add]="add"
-   [class.remove]="!add">
+   [class.add]="add && add !== undefined"
+   [class.remove]="!add && add !== undefined">
    {{message}}
 </div>

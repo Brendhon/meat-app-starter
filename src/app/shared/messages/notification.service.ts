@@ -7,7 +7,7 @@ export class NotificationService {
 
   constructor() {}
 
-  notify(message: string, add: boolean){
+  notify(message: string, add?: boolean){
     this.notifier.emit({message, add})
   }
 
