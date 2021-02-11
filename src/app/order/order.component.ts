@@ -11,6 +11,8 @@ import { RadioOption } from "app/shared/radio/radio-option.model";
 import { Order, OrderItem } from "./order.model";
 import { OrderService } from "./order.service";
 
+import "rxjs/add/operator/do";
+
 @Component({
   selector: "mt-order",
   templateUrl: "./order.component.html",
@@ -18,6 +20,7 @@ import { OrderService } from "./order.service";
 export class OrderComponent implements OnInit {
   delivery: number = 8;
   orderForm: FormGroup;
+  orderId: string;
   paymentOptions: RadioOption[] = [
     { label: "Dinheiro", value: "MON" },
     { label: "Cartão de Débito", value: "DEB" },
@@ -76,7 +79,7 @@ export class OrderComponent implements OnInit {
       return { emailsNotMatch: true };
     }
 
-    return undefined
+    return undefined;
   }
 
   itemsValue(): number {
@@ -104,11 +107,18 @@ export class OrderComponent implements OnInit {
       new OrderItem(item.quantity, item.menuItem.id)
     );
     this.orderService.checkOrder(order)
+      .do((orderId: string) => {
+        this.orderId = orderId;
+      })
       .subscribe((orderId: string) => {
         this.router.navigate(["/order-summary"]);
         console.log(`Compra concluída: ${orderId}`);
         this.orderService.clear();
       });
     console.log(order);
+  }
+
+  isOrderCompleted(): boolean {
+    return this.orderId !== undefined;
   }
 }
