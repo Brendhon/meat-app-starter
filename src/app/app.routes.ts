@@ -31,6 +31,7 @@ export const ROUTES: Routes = [
     path: "order",
     loadChildren: "./order/order.module#OrderModule",
     canLoad: [LoggedInGuard],
+    canActivate: [LoggedInGuard]
   },
 
   // Caso nenhuma das rotas anteriores seja encontradas entre nessa rota

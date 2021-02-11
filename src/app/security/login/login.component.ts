@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit {
       password: this.fb.control("", [Validators.required]),
     });
 
-    this.navigateTo = this.activatedRoute.snapshot.params["to"] || "/";
+    this.navigateTo = this.activatedRoute.snapshot.params["to"] || btoa("/");
   }
 
   login() {
@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit {
       (errorBody) =>
         this.notificationService.notify(errorBody.error.message, false),
       () => {
-        this.router.navigate([this.navigateTo]);
+        this.router.navigate([atob(this.navigateTo)]); // Realizando o decoder da base 64
       },
     );
   }

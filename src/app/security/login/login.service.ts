@@ -29,7 +29,7 @@ export class LoginService {
   }
   
   handleLogin(path?: string) {
-    this.route.navigate(['/login', path])
+    this.route.navigate(['/login', btoa(path)]) // Transformando em Base 64 para a URL ser mais amigável
   }
 
 }
