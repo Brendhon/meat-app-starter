@@ -7,10 +7,8 @@ import {
   trigger,
 } from "@angular/animations";
 import { NotificationService } from "../notification.service";
-import { Observable } from "rxjs/Observable";
-import "rxjs/add/observable/timer";
-import "rxjs/add/operator/do";
-import "rxjs/add/operator/switchMap";
+import { timer } from "rxjs";
+import { switchMap, tap } from "rxjs/operators";
 
 @Component({
   selector: "mt-snackbar",
@@ -49,11 +47,13 @@ export class SnackbarComponent implements OnInit {
     // subscribe - Coloca um listening no Observable
     // do - Permite realizar uma ação no meio da cadeia
     this.notificationService.notifier
-      .do((resp) => { // Realiza uma ação e mostra o Snackbar
-        this.message = resp.message;
-        this.snackVisibility = "visible";
-        this.add = resp.add;
-      }).switchMap((msg) => Observable.timer(3000)) // Trocar o Observable por um timer
-      .subscribe((timer) => this.snackVisibility = "hidden"); // Realiza o subscribe para ouvir quando o timer terminar
+      .pipe(
+        tap((resp) => { // Realiza uma ação e mostra o Snackbar
+          this.message = resp.message;
+          this.snackVisibility = "visible";
+          this.add = resp.add;
+        }),
+        switchMap((msg) => timer(3000)), // Trocar o Observable por um timer
+      ).subscribe((timer) => this.snackVisibility = "hidden"); // Realiza o subscribe para ouvir quando o timer terminar
   }
 }

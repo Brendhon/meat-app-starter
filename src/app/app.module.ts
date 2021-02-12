@@ -19,7 +19,12 @@ import { ReviewsComponent } from "./restaurant-detail/reviews/reviews.component"
 import { OrderSummaryComponent } from "./order-summary/order-summary.component";
 import { SharedModule } from "./shared/shared.module";
 import { NotFoundComponent } from "./not-found/not-found.component";
-import { HashLocationStrategy, LocationStrategy } from "@angular/common";
+import { HashLocationStrategy, LocationStrategy, registerLocaleData } from "@angular/common";
+import locatePt from '@angular/common/locales/pt'
+
+// Definindo o localização padrão
+registerLocaleData(locatePt, 'pt')
+
 import { LoginComponent } from './security/login/login.component';
 import { UserDetailComponent } from './header/user-detail/user-detail.component';
 import { ApplicationErrorHandler } from "./app.error-handler";
@@ -55,12 +60,12 @@ import { ApplicationErrorHandler } from "./app.error-handler";
   providers: [
     {
       provide: LOCALE_ID,
-      useValue: "pt-BR",
+      useValue: "pt",
     },
     {
       // Utilizar a estrategia de Hash para a navegação
       provide: LocationStrategy,
-      useClass: HashLocationStrategy,
+      useClass: HashLocationStrategy, 
     },
     {
       // Utilizar o nosso ErrorHandler

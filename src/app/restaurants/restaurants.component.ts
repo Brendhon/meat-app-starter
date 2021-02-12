@@ -11,13 +11,14 @@ import { FormBuilder, FormControl, FormGroup } from "@angular/forms";
 import { Restaurant } from "./restaurant/restaurant.model";
 import { RestaurantService } from "./restaurants.service";
 
-import { Observable } from "rxjs/Observable";
-import "rxjs/add/operator/switchMap";
-import "rxjs/add/operator/do";
-import "rxjs/add/operator/debounceTime";
-import "rxjs/add/operator/distinctUntilChanged";
-import "rxjs/add/operator/catch";
-import "rxjs/add/observable/from";
+import { from, Observable } from "rxjs";
+import {
+  catchError,
+  debounceTime,
+  distinctUntilChanged,
+  switchMap,
+  tap,
+} from "rxjs/operators";
 
 @Component({
   selector: "mt-restaurants",
@@ -66,11 +67,15 @@ export class RestaurantsComponent implements OnInit {
     });
 
     this.searchControl.valueChanges
-      .debounceTime(800) // debounceTime - só chama o evento se a diferença entre dois eventos seja maior que o tempo informado
-      .distinctUntilChanged() // distinctUntilChanged - só executa o chamado se os eventos forem diferentes
-      .switchMap((searchTerm) =>
-        this.restaurantsService.getRestaurants(searchTerm)
-          .catch((error) => Observable.from([])) // Caso de Erro - Não avisar quebrar o valueChanges
+      .pipe(
+        debounceTime(800), // debounceTime - só chama o evento se a diferença entre dois eventos seja maior que o tempo informado
+        distinctUntilChanged(), // distinctUntilChanged - só executa o chamado se os eventos forem diferentes
+        switchMap((searchTerm) =>
+          this.restaurantsService.getRestaurants(searchTerm)
+            .pipe(
+              catchError((error) => from([])), // Caso de Erro - Não avisar quebrar o valueChanges
+            )
+        ),
       )
       .subscribe((resp) => this.restaurants = resp);
 
