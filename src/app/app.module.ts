@@ -1,5 +1,5 @@
 import { BrowserModule } from "@angular/platform-browser";
-import { LOCALE_ID, NgModule } from "@angular/core";
+import { ErrorHandler, LOCALE_ID, NgModule } from "@angular/core";
 import { HttpClientModule } from "@angular/common/http";
 import { PreloadAllModules, RouterModule } from "@angular/router";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
@@ -22,6 +22,7 @@ import { NotFoundComponent } from "./not-found/not-found.component";
 import { HashLocationStrategy, LocationStrategy } from "@angular/common";
 import { LoginComponent } from './security/login/login.component';
 import { UserDetailComponent } from './header/user-detail/user-detail.component';
+import { ApplicationErrorHandler } from "./app.error-handler";
 
 @NgModule({
   declarations: [
@@ -60,6 +61,11 @@ import { UserDetailComponent } from './header/user-detail/user-detail.component'
       // Utilizar a estrategia de Hash para a navegação
       provide: LocationStrategy,
       useClass: HashLocationStrategy,
+    },
+    {
+      // Utilizar o nosso ErrorHandler
+      provide: ErrorHandler,
+      useClass: ApplicationErrorHandler,
     },
   ],
   bootstrap: [AppComponent],
