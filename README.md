@@ -45,7 +45,7 @@ $ npm run server
 
 ```
 
-### 📄 Rodando em modo desenvolvedor
+### ⚽ Rodando em modo desenvolvedor
 
 ```bash
 
